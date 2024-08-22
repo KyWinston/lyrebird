@@ -1,7 +1,7 @@
 use bevy::{ecs::system::EntityCommands, prelude::*};
 use bevy_yarnspinner::prelude::DialogueOption;
 
-use crate::dialogue_view::asset::CONTINUE_INDICATOR;
+use crate::dialogue_view::widgets::CONTINUE_INDICATOR;
 
 use super::{
     components::{
@@ -30,7 +30,6 @@ pub fn setup(mut commands: Commands) {
                         MinTrackSizingFunction::Auto,
                         MaxTrackSizingFunction::Px(DIALOG_WIDTH),
                     )],
-
                     grid_auto_rows: vec![GridTrack::min_content()],
                     ..default()
                 },
@@ -58,7 +57,6 @@ pub fn setup(mut commands: Commands) {
                 DialogueNameNode,
                 Label,
             ));
-
             parent
                 .spawn((
                     fmt_name("dialogue"),
@@ -108,7 +106,6 @@ pub fn setup(mut commands: Commands) {
                         OptionsNode,
                     ));
                 });
-
             parent.spawn((
                 fmt_name("continue indicator"),
                 ImageBundle {

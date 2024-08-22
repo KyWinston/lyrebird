@@ -1,7 +1,4 @@
-use bevy::{
-    log::{Level, LogPlugin},
-    prelude::*,
-};
+use bevy::prelude::*;
 use systems::{connect, disconnect, refresh_ports, show_connection, show_last_message, show_ports};
 
 pub mod components;

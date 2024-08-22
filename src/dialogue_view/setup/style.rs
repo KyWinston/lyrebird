@@ -3,8 +3,7 @@ use bevy::{
     prelude::*,
 };
 
-use crate::dialogue_view::asset::MEDIUM;
-
+use crate::dialogue_view::widgets::MEDIUM;
 
 pub const DIALOG_WIDTH: f32 = 800.0 * 0.8;
 pub const TEXT_BORDER_HORIZONTAL: f32 = 120.0;
@@ -17,6 +16,7 @@ pub fn standard() -> Style {
         ..default()
     }
 }
+
 pub fn options() -> Style {
     const INDENT_MODIFIER: f32 = 1.0;
     Style {
@@ -33,6 +33,7 @@ pub fn text_standard() -> TextStyle {
         color: Color::WHITE,
     }
 }
+
 pub fn text_name() -> TextStyle {
     TextStyle {
         font: MEDIUM,

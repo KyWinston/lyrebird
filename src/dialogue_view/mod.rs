@@ -1,4 +1,4 @@
-use asset::ui_assets_plugin;
+use widgets::ui_assets_plugin;
 use bevy::prelude::*;
 use bevy_yarnspinner::prelude::YarnSpinnerPlugin;
 use options_selection::option_selection_plugin;
@@ -18,7 +18,7 @@ impl DialogueViewPlugin {
     }
 }
 
-pub mod asset;
+pub mod widgets;
 pub mod options_selection;
 pub mod setup;
 pub mod typewriter;
