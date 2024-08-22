@@ -1,0 +1,54 @@
+[package]
+name = "parakeet"
+version = "0.1.0"
+edition = "2021"
+description = "a crate for sound and music generation in bevy"
+authors = ["Ky 'geksupport' Winston <Ky Winston kywinston@proton.me>"]
+exclude = ["assets/*", "examples/*", "**/bin", "*_template"]
+publish = true
+
+[dependencies]
+bevy = { version = "0.14.1", default-features = false, features = [
+    "bevy_asset",
+    "bevy_ui",
+    "png",
+] }
+bevy_fundsp = { git = "https://github.com/niconicoj/bevy_fundsp", branch = "main", default-features = false, features = [
+    "kira",
+] }
+bevy_kira_audio = "0.20.0"
+bevy_yarnspinner = "0.3.1"
+unicode-segmentation = "1.11.0"
+uuid = "1.10.0"
+bevy_midi = "0.9.0"
+
+
+[dev-dependencies]
+bevy = { version = "0.14.1", default-features = false, features = [
+    "bevy_asset",
+    "bevy_winit",
+    "bevy_render",
+    "file_watcher",
+    "bevy_ui",
+    "x11",
+    "png",
+    "tonemapping_luts",
+] }
+cargo-husky = { version = "1", features = [
+    "precommit-hook",
+    "run-cargo-test",
+    "run-cargo-clippy",
+] }
+
+[target.'cfg(target_os = "linux")'.dev-dependencies.bevy]
+version = "0.14"
+features = ["x11", "wayland"]
+default-features = false
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
