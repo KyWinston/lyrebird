@@ -1,9 +1,9 @@
 use bevy::prelude::*;
 use bevy_fundsp::DspPlugin;
 use bevy_kira_audio::AudioPlugin;
-use bevy_midi::input::MidiInputPlugin;
 use dialogue::DialoguePlugin;
 use dialogue_view::DialogueViewPlugin;
+use midi_keys::MidiKeysPlugin;
 use music::MusicPlugin;
 use sfx::SfxPlugin;
 use soundfont::SoundFontPlugin;
@@ -13,7 +13,7 @@ pub struct ParakeetPlugin;
 
 pub mod dialogue;
 pub mod dialogue_view;
-pub mod midi_input;
+pub mod midi_keys;
 pub mod music;
 pub mod resources;
 pub mod sfx;
@@ -26,7 +26,7 @@ impl Plugin for ParakeetPlugin {
             AudioPlugin,
             DspPlugin::default(),
             MusicPlugin,
-            MidiInputPlugin,
+            MidiKeysPlugin,
             SfxPlugin,
             DialoguePlugin,
             DialogueViewPlugin,

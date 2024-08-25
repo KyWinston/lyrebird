@@ -3,7 +3,6 @@ use bevy_kira_audio::prelude::*;
 
 use super::resources::MusicChannel;
 
-
 #[derive(Event)]
 pub struct PlayEvent(pub String);
 

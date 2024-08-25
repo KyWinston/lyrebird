@@ -1,5 +1,8 @@
-use bevy::{log::{Level, LogPlugin}, prelude::*};
-use bevy_midi::input::MidiInputSettings;
+use bevy::{
+    log::{Level, LogPlugin},
+    prelude::*,
+};
+use bevy_midi::{input::MidiInputSettings, output::MidiOutputSettings};
 use parakeet::ParakeetPlugin;
 use systems::setup;
 
@@ -11,6 +14,9 @@ fn main() {
             port_name: "input",
             client_name: "input",
             ..default()
+        })
+        .insert_resource(MidiOutputSettings {
+            port_name: "output",
         })
         .add_plugins((
             DefaultPlugins

@@ -3,7 +3,6 @@ use bevy::prelude::*;
 #[derive(Component)]
 pub struct Instructions;
 
-
 pub const KEY_PORT_MAP: [(KeyCode, usize); 10] = [
     (KeyCode::Digit0, 0),
     (KeyCode::Digit1, 1),
@@ -16,3 +15,19 @@ pub const KEY_PORT_MAP: [(KeyCode, usize); 10] = [
     (KeyCode::Digit8, 8),
     (KeyCode::Digit9, 9),
 ];
+
+#[derive(Debug, Clone, Copy)]
+pub enum Pitch {
+    C,
+    Cs,
+    D,
+    Ds,
+    E,
+    F,
+    Fs,
+    G,
+    Gs,
+    A,
+    As,
+    B,
+}

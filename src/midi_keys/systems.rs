@@ -1,5 +1,10 @@
-use bevy::{color::palettes::css::{GREEN, RED}, prelude::*};
+use bevy::{
+    color::palettes::css::{GREEN, RED},
+    prelude::*,
+};
 use bevy_midi::input::{MidiData, MidiInput, MidiInputConnection};
+
+use crate::soundfont::events::SFplayEvent;
 
 use super::components::{Instructions, KEY_PORT_MAP};
 
@@ -56,6 +61,7 @@ pub fn show_connection(
 pub fn show_last_message(
     mut midi_data: EventReader<MidiData>,
     mut instructions: Query<&mut Text, With<Instructions>>,
+    mut midi_ev: EventWriter<SFplayEvent>,
 ) {
     for data in midi_data.read() {
         let text_section = &mut instructions.single_mut().sections[3];
@@ -70,5 +76,13 @@ pub fn show_last_message(
             },
             data.message.msg
         );
+        if data.message.is_note_on() {
+            let offset = data.message.msg[1] as f32 - 57.0;
+            let spacing = offset / 12.0;
+            midi_ev.send(SFplayEvent(
+                440.0 * 2.0_f32.powf(spacing),
+                "tutorial".to_string(),
+            ));
+        }
     }
 }
