@@ -1,9 +1,11 @@
 use bevy::prelude::*;
-use bevy_fundsp::DspPlugin;
 use bevy_kira_audio::AudioPlugin;
 use dialogue::DialoguePlugin;
 use dialogue_view::DialogueViewPlugin;
+
+#[cfg(feature = "debug")]
 use midi_keys::MidiKeysPlugin;
+
 use music::MusicPlugin;
 use sfx::SfxPlugin;
 use soundfont::SoundFontPlugin;
@@ -13,6 +15,7 @@ pub struct ParakeetPlugin;
 
 pub mod dialogue;
 pub mod dialogue_view;
+#[cfg(feature = "debug")]
 pub mod midi_keys;
 pub mod music;
 pub mod resources;
@@ -24,9 +27,9 @@ impl Plugin for ParakeetPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins((
             AudioPlugin,
-            DspPlugin::default(),
-            MusicPlugin,
+            #[cfg(feature = "debug")]
             MidiKeysPlugin,
+            MusicPlugin,
             SfxPlugin,
             DialoguePlugin,
             DialogueViewPlugin,

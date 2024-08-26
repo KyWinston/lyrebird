@@ -2,6 +2,8 @@ use bevy::{
     log::{Level, LogPlugin},
     prelude::*,
 };
+
+#[cfg(feature = "debug")]
 use bevy_midi::{input::MidiInputSettings, output::MidiOutputSettings};
 use parakeet::ParakeetPlugin;
 use systems::setup;
@@ -9,6 +11,7 @@ use systems::setup;
 pub mod systems;
 
 fn main() {
+    #[cfg(feature = "debug")]
     App::new()
         .insert_resource(MidiInputSettings {
             port_name: "input",

@@ -1,5 +1,5 @@
 use bevy::{prelude::*, utils::HashMap};
-use bevy_fundsp::prelude::*;
+use fundsp::prelude::*;
 use uuid::Uuid;
 
 #[derive(Resource)]

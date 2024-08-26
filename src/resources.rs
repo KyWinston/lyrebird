@@ -1,9 +1,6 @@
 use bevy::prelude::*;
-use bevy_fundsp::prelude::{
-    hacker::{square_hz, unit},
-    prelude::U1,
-    An, Unit, U0,
-};
+use fundsp::hacker::{square_hz, unit, An, Unit, U0, U1};
+
 use std::marker::PhantomData;
 
 #[derive(Resource)]
@@ -12,7 +9,7 @@ pub struct ChannelAudioState<T> {
     pub paused: bool,
     pub loop_started: bool,
     pub volume: f64,
-    _marker: PhantomData<T>,
+    pub _marker: PhantomData<T>,
 }
 
 impl<T> Default for ChannelAudioState<T> {
@@ -28,7 +25,7 @@ impl<T> Default for ChannelAudioState<T> {
 }
 
 ///common generators
-pub fn hh_808() -> An<Unit<U0, U1>> {
+pub fn hh_808() -> An<Unit<U0,U1>> {
     unit::<U0, U1>(Box::new(
         square_hz(245.0)
             + square_hz(306.0)

@@ -1,4 +1,5 @@
 use bevy::{color::palettes::css::RED, prelude::*};
+#[cfg(feature = "debug")]
 use parakeet::midi_keys::components::Instructions;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -45,6 +46,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             },
             ..default()
         },
+        #[cfg(feature = "debug")]
         Instructions,
     ));
 }
