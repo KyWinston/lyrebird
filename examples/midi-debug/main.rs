@@ -5,7 +5,8 @@ use bevy::{
 
 #[cfg(feature = "debug")]
 use bevy_midi::{input::MidiInputSettings, output::MidiOutputSettings};
-use parakeet::ParakeetPlugin;
+
+use lyrebird::LyrebirdPlugin;
 use systems::setup;
 
 pub mod systems;

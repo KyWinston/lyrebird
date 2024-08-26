@@ -11,7 +11,7 @@ use sfx::SfxPlugin;
 use soundfont::SoundFontPlugin;
 use systems::setup_cam_audio;
 
-pub struct ParakeetPlugin;
+pub struct LyrebirdPlugin;
 
 pub mod dialogue;
 pub mod dialogue_view;
@@ -23,7 +23,7 @@ pub mod sfx;
 pub mod soundfont;
 pub mod systems;
 
-impl Plugin for ParakeetPlugin {
+impl Plugin for LyrebirdPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins((
             AudioPlugin,
