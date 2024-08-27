@@ -1,10 +1,10 @@
 use bevy::prelude::*;
 use bevy_kira_audio::{AudioChannel, AudioControl};
 
-use super::resources::SfChannel;
+use super::resources::{SfChannel, SoundFont};
 
 #[derive(Event)]
-pub struct SFplayEvent(String);
+pub struct SFplayEvent(pub SoundFont);
 
 pub fn play_sf(
     asset_server: Res<AssetServer>,
@@ -12,6 +12,11 @@ pub fn play_sf(
     audio: Res<AudioChannel<SfChannel>>,
 ) {
     for ev in sf_play.read() {
-        audio.play(asset_server.load(ev.0.clone())).with_volume(0.3);
+        let ev = &ev.0;
+        audio
+            .play(asset_server.load("audio/soundfonts/".to_owned() + &ev.path + ".wav"))
+            .start_from(ev.target_chunk[0])
+            .end_at(ev.target_chunk[1])
+            .with_volume(ev.volume);
     }
 }

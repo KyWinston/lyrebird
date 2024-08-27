@@ -10,6 +10,8 @@ pub mod events;
 pub mod resources;
 pub mod systems;
 
+pub const UNNAMED: &str = "unnamed";
+
 pub fn typewriter_plugin(app: &mut App) {
     app.add_systems(
         Update,
