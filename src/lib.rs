@@ -19,6 +19,7 @@ pub mod dialogue_view;
 pub mod midi_keys;
 pub mod music;
 pub mod resources;
+pub mod components;
 pub mod sfx;
 pub mod soundfont;
 pub mod systems;
