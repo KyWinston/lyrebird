@@ -16,7 +16,7 @@ To include Lyrebird in your Bevy project, add the following to your `Cargo.toml`
 
 ```toml
 [dependencies]
-parakeet = "0.1.8"
+lyrebird = "0.1.8"
 ```
 
 Note that, as this crate is in alpha, future versions may introduce breaking changes.
