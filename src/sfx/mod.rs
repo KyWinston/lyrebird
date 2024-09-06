@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use components::SfxEmitter;
 use systems::play_sfx;
 
 pub mod components;
@@ -8,6 +9,8 @@ pub struct SfxPlugin;
 
 impl Plugin for SfxPlugin {
     fn build(&self, app: &mut App) {
-        app.observe(play_sfx);
+        app
+        .register_type::<SfxEmitter>()
+        .observe(play_sfx);
     }
 }
