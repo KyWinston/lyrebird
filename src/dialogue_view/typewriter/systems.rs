@@ -70,6 +70,10 @@ pub fn write_text(
     mut root_visibility: Query<&mut Visibility, With<UiRootNode>>,
 ) {
     let mut text = text.single_mut();
+    let speaking = typewriter
+        .character_name
+        .clone()
+        .unwrap_or(UNNAMED.to_string());
     if typewriter.last_before_options && option_selection.is_none() {
         *text = default();
         return;
@@ -81,15 +85,7 @@ pub fn write_text(
         *root_visibility.single_mut() = Visibility::Inherited;
     }
     typewriter.update_current_text();
-    if let Some(name) = typewriter.character_name.as_deref() {
-        if soundfonts.0.contains_key(name) {
-            sf_ev.send(SFplayEvent(soundfonts.0[name].clone()));
-        } else {
-            sf_ev.send(SFplayEvent(soundfonts.0[UNNAMED].clone()));
-        }
-    } else {
-        sf_ev.send(SFplayEvent(soundfonts.0[UNNAMED].clone()));
-    }
+    sf_ev.send(SFplayEvent(soundfonts.0[&speaking].clone()));
     if typewriter.is_finished() {
         if let Some(name) = typewriter.character_name.as_deref() {
             speaker_change_events.send(SpeakerChangeEvent {

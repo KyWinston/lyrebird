@@ -15,6 +15,12 @@ bevy = { version = "0.14.1", default-features = false, features = [
     "bevy_ui",
 
 ] }
+# bevy = { git = "https://github.com/bevyengine/bevy", branch = "release-0.14.2", default-features = false, features = [
+#     "bevy_asset",
+#     "png",
+#     "bevy_ui",
+
+# ] }
 fundsp = "0.18.2"
 bevy_kira_audio = "0.20.0"
 bevy_yarnspinner = "0.3.1"
@@ -39,6 +45,17 @@ bevy = { version = "0.14.1", default-features = false, features = [
     "png",
     "tonemapping_luts",
 ] }
+# bevy = { git = "https://github.com/bevyengine/bevy", branch = "release-0.14.2", default-features = false, features = [
+#     "bevy_asset",
+#     "bevy_winit",
+#     "bevy_render",
+#     "bevy_core_pipeline",
+#     "file_watcher",
+#     "bevy_ui",
+#     "bevy_text",
+#     "png",
+#     "tonemapping_luts",
+# ] }
 cargo-husky = { version = "1", features = [
     "precommit-hook",
     "run-cargo-test",
@@ -46,7 +63,9 @@ cargo-husky = { version = "1", features = [
 ] }
 
 [target.'cfg(target_os = "linux")'.dev-dependencies.bevy]
-version = "0.14"
+# git = "https://github.com/bevyengine/bevy"
+# branch = "release-0.14.2"
+version = "0.14.1"
 features = ["x11", "wayland"]
 default-features = false
 
