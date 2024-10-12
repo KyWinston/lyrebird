@@ -1,6 +1,4 @@
 use bevy::prelude::*;
-use fundsp::hacker::{square_hz, unit, An, Unit, U0, U1};
-
 use std::marker::PhantomData;
 
 #[derive(Resource)]
@@ -24,26 +22,26 @@ impl<T> Default for ChannelAudioState<T> {
     }
 }
 
-///common generators
-pub fn hh_808() -> An<Unit<U0,U1>> {
-    unit::<U0, U1>(Box::new(
-        square_hz(245.0)
-            + square_hz(306.0)
-            + square_hz(365.0)
-            + square_hz(415.0)
-            + square_hz(437.0)
-            + square_hz(619.0),
-    ))
-}
+//common generators
+// pub fn hh_808() -> An<Unit<U0,U1>> {
+//     unit::<U0, U1>(Box::new(
+//         square_hz(245.0)
+//             + square_hz(306.0)
+//             + square_hz(365.0)
+//             + square_hz(415.0)
+//             + square_hz(437.0)
+//             + square_hz(619.0),
+//     ))
+// }
 
-pub fn hh_808_mk() -> An<Unit<U0, U1>> {
-    //Moritz Klein hi-hat variation: https://www.youtube.com/watch?v=zbBY7JL9nnQ&t=1424s
-    unit::<U0, U1>(Box::new(
-        square_hz(120.0)
-            + square_hz(150.0)
-            + square_hz(180.0)
-            + square_hz(219.0)
-            + square_hz(240.0)
-            + square_hz(261.0),
-    ))
-}
+// pub fn hh_808_mk() -> An<Unit<U0, U1>> {
+//     //Moritz Klein hi-hat variation: https://www.youtube.com/watch?v=zbBY7JL9nnQ&t=1424s
+//     unit::<U0, U1>(Box::new(
+//         square_hz(120.0)
+//             + square_hz(150.0)
+//             + square_hz(180.0)
+//             + square_hz(219.0)
+//             + square_hz(240.0)
+//             + square_hz(261.0),
+//     ))
+// }

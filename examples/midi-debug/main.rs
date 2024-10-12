@@ -1,13 +1,5 @@
-use bevy::{
-    log::{Level, LogPlugin},
-    prelude::*,
-};
-
 #[cfg(feature = "debug")]
 use bevy_midi::{input::MidiInputSettings, output::MidiOutputSettings};
-
-use lyrebird::LyrebirdPlugin;
-use systems::setup;
 
 pub mod systems;
 

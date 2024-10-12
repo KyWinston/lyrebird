@@ -1,25 +1,23 @@
 use bevy::prelude::*;
 use bevy_kira_audio::AudioPlugin;
-use dialogue::DialoguePlugin;
-use dialogue_view::DialogueViewPlugin;
 
 #[cfg(feature = "debug")]
 use midi_keys::MidiKeysPlugin;
 
 use music::MusicPlugin;
+use sequencer::SequencerPlugin;
 use sfx::SfxPlugin;
 use soundfont::SoundFontPlugin;
 use systems::setup_cam_audio;
 
 pub struct LyrebirdPlugin;
 
-pub mod dialogue;
-pub mod dialogue_view;
+pub mod components;
 #[cfg(feature = "debug")]
 pub mod midi_keys;
 pub mod music;
 pub mod resources;
-pub mod components;
+pub mod sequencer;
 pub mod sfx;
 pub mod soundfont;
 pub mod systems;
@@ -32,9 +30,8 @@ impl Plugin for LyrebirdPlugin {
             MidiKeysPlugin,
             MusicPlugin,
             SfxPlugin,
-            DialoguePlugin,
-            DialogueViewPlugin,
             SoundFontPlugin,
+            SequencerPlugin,
         ))
         .observe(setup_cam_audio);
     }

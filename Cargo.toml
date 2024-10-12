@@ -12,40 +12,25 @@ publish = true
 bevy = { version = "0.14.2", default-features = false, features = [
     "bevy_asset",
     "png",
-    "bevy_ui",
-
 ] }
-# bevy = { git = "https://github.com/bevyengine/bevy", branch = "release-0.14.2", default-features = false, features = [
-#     "bevy_asset",
-#     "png",
-#     "bevy_ui",
-
-# ] }
-fundsp = "0.18.2"
 bevy_kira_audio = "0.20.0"
-bevy_yarnspinner = "0.3.1"
-unicode-segmentation = "1.11.0"
 bevy_midi = { version = "0.9.0", optional = true }
 uuid = "1.10.0"
+# glicol_synth = "0.13.5"
+fundsp = "0.20.0"
+leafwing_manifest = { version = "0.2.0", features = ["ron"] }
 
 [features]
 default = []
 debug = ["dep:bevy_midi"]
 
-
 [dev-dependencies]
 bevy = { version = "0.14.2", default-features = false, features = [
-    "bevy_asset",
-    "bevy_winit",
-    "bevy_render",
-    "bevy_core_pipeline",
-    "file_watcher",
-    "bevy_ui",
-    "bevy_text",
     "png",
+    "bevy_ui",
     "tonemapping_luts",
 ] }
-
+serde = "1.0.210"
 cargo-husky = { version = "1", features = [
     "precommit-hook",
     "run-cargo-test",
@@ -53,8 +38,8 @@ cargo-husky = { version = "1", features = [
 ] }
 
 [target.'cfg(target_os = "linux")'.dev-dependencies.bevy]
+features = ["x11", "wayland", "bevy_winit"]
 version = "0.14.2"
-features = ["x11", "wayland"]
 default-features = false
 
 # Enable a small amount of optimization in debug mode
@@ -65,8 +50,15 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
+
 [[example]]
 name = "midi-debug"
 path = "examples/midi-debug/main.rs"
 features = ["debug"]
+doc-scrape-examples = true
+
+[[example]]
+name = "sequence"
+path = "examples/sequence/main.rs"
+features = []
 doc-scrape-examples = true

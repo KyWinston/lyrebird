@@ -1,0 +1,18 @@
+(
+    soundfonts: [
+        (
+            name: "unnamed",
+            path: "will-0-wisp",
+            start_chunk: 0.30,
+            end_chunk: 0.40,
+            volume: 1.1,
+        ),
+        (
+            name: "Hohenheim",
+            path: "fantastic",
+            start_chunk: 0.3,
+            end_chunk: 0.45,
+            volume: 0.3,
+        ),
+    ],
+)
