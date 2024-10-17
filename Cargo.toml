@@ -13,12 +13,10 @@ bevy = { version = "0.14.2", default-features = false, features = [
     "bevy_asset",
     "png",
 ] }
-bevy_kira_audio = "0.20.0"
 bevy_midi = { version = "0.9.0", optional = true }
 uuid = "1.10.0"
-# glicol_synth = "0.13.5"
-fundsp = "0.20.0"
-leafwing_manifest = { version = "0.2.0", features = ["ron"] }
+bevy_glicol = { path = "../bevy_glicol" }
+cfg-if = "1.0.0"
 
 [features]
 default = []
@@ -27,9 +25,11 @@ debug = ["dep:bevy_midi"]
 [dev-dependencies]
 bevy = { version = "0.14.2", default-features = false, features = [
     "png",
+    "bevy_asset",
     "bevy_ui",
     "tonemapping_luts",
 ] }
+leafwing_manifest = { version = "0.2", features = ["ron"] }
 serde = "1.0.210"
 cargo-husky = { version = "1", features = [
     "precommit-hook",
@@ -50,15 +50,8 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
-
 [[example]]
 name = "midi-debug"
 path = "examples/midi-debug/main.rs"
 features = ["debug"]
-doc-scrape-examples = true
-
-[[example]]
-name = "sequence"
-path = "examples/sequence/main.rs"
-features = []
 doc-scrape-examples = true

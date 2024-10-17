@@ -1,21 +1,26 @@
+#[cfg(feature = "debug")]
+use crate::synth::events::PlayTone;
+#[cfg(feature = "debug")]
 use bevy::{
     color::palettes::css::{GREEN, RED},
     prelude::*,
 };
 
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 use bevy_midi::input::{MidiData, MidiInput, MidiInputConnection};
 
-use crate::music::events::InstrumentPlayEvent;
+#[cfg(feature = "debug")]
 use super::components::{Instructions, KEY_PORT_MAP};
+#[cfg(feature = "debug")]
+use crate::music::events::InstrumentPlayEvent;
 
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn refresh_ports(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     if keys.just_pressed(KeyCode::KeyR) {
         input.refresh_ports();
     }
 }
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn connect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     for (keycode, index) in &KEY_PORT_MAP {
         if keys.just_pressed(*keycode) {
@@ -25,13 +30,13 @@ pub fn connect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
         }
     }
 }
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn disconnect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     if keys.just_pressed(KeyCode::Escape) {
         input.disconnect();
     }
 }
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn show_ports(input: Res<MidiInput>, mut instructions: Query<&mut Text, With<Instructions>>) {
     if input.is_changed() {
         let text_section = &mut instructions.single_mut().sections[1];
@@ -43,10 +48,11 @@ pub fn show_ports(input: Res<MidiInput>, mut instructions: Query<&mut Text, With
         }
     }
 }
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn show_connection(
     connection: Res<MidiInputConnection>,
     mut instructions: Query<&mut Text, With<Instructions>>,
+    tone: EventWriter<PlayTone>,
 ) {
     if connection.is_changed() {
         let text_section = &mut instructions.single_mut().sections[2];
@@ -59,11 +65,11 @@ pub fn show_connection(
         }
     }
 }
-#[cfg(feature="debug")]
+#[cfg(feature = "debug")]
 pub fn show_last_message(
     mut midi_data: EventReader<MidiData>,
     mut instructions: Query<&mut Text, With<Instructions>>,
-    mut midi_ev: EventWriter<InstrumentPlayEvent>,
+    mut tone: EventWriter<PlayTone>,
 ) {
     for data in midi_data.read() {
         let text_section = &mut instructions.single_mut().sections[3];
@@ -78,13 +84,6 @@ pub fn show_last_message(
             },
             data.message.msg
         );
-        if data.message.is_note_on() {
-            let offset = data.message.msg[1] as f32 - 57.0;
-            let spacing = offset / 12.0;
-            midi_ev.send(InstrumentPlayEvent(
-                (2040.0 * 2.0_f32.powf(spacing), 1.0),
-                "hi-hat".to_string(),
-            ));
-        }
+        tone.send(PlayTone(data.message.msg, "hi_hat".to_string()));
     }
 }

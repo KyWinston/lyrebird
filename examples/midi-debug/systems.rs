@@ -1,10 +1,8 @@
 use bevy::{color::palettes::css::RED, prelude::*};
-#[cfg(feature = "debug")]
-use parakeet::midi_keys::components::Instructions;
+use lyrebird::midi_keys::components::Instructions;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
-
     commands.spawn((
         TextBundle {
             text: Text {
@@ -46,7 +44,6 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             },
             ..default()
         },
-        #[cfg(feature = "debug")]
         Instructions,
     ));
 }

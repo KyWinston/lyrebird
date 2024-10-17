@@ -11,7 +11,7 @@ pub mod resources;
 pub struct MidiKeysPlugin;
 
 impl Plugin for MidiKeysPlugin {
-    fn build(&self, app: &mut App) {
+    fn build(&self, _app: &mut App) {
         #[cfg(feature="debug")]
         app.add_plugins((MidiInputPlugin, MidiOutputPlugin))
             .add_systems(

@@ -34,14 +34,4 @@ impl<T> Default for ChannelAudioState<T> {
 //     ))
 // }
 
-// pub fn hh_808_mk() -> An<Unit<U0, U1>> {
-//     //Moritz Klein hi-hat variation: https://www.youtube.com/watch?v=zbBY7JL9nnQ&t=1424s
-//     unit::<U0, U1>(Box::new(
-//         square_hz(120.0)
-//             + square_hz(150.0)
-//             + square_hz(180.0)
-//             + square_hz(219.0)
-//             + square_hz(240.0)
-//             + square_hz(261.0),
-//     ))
-// }
+

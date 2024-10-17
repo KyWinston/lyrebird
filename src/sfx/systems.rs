@@ -1,26 +1,17 @@
-use bevy::prelude::*;
-use bevy_kira_audio::prelude::*;
+// use std::ops::Deref;
 
-use super::components::SfxEmitter;
+// use bevy::prelude::*;
+// use bevy_glicol::prelude::GlicolEngine;
+
+// use super::components::SfxEmitter;
 
 pub fn play_sfx(
-    trigger: Trigger<OnAdd, SfxEmitter>,
-    mut commands: Commands,
-    query: Query<(Entity, &SfxEmitter)>,
-    asset_server: Res<AssetServer>,
-    audio: Res<Audio>,
+    // trigger: Trigger<OnAdd, SfxEmitter>,
+    // mut commands: Commands,
+    // engine: Res<GlicolEngine>,
+    // query: Query<(Entity, &SfxEmitter)>,
+    // asset_server: Res<AssetServer>,
 ) {
-    let (_ent, emitter) = query.get(trigger.entity()).unwrap();
-    let mut sfx = audio.play(asset_server.load("audio/sfx/".to_string() + &emitter.sound));
-    sfx.with_volume(emitter.intensity)
-        .start_from(emitter.get_duration().0)
-        .end_at(emitter.get_duration().1);
-
-    if emitter.looped {
-        sfx.looped();
-    }
-
-    commands.entity(trigger.entity()).insert(AudioEmitter {
-        instances: vec![sfx.handle()],
-    });
+    // engine.update_with_code(code);
+    // let mut sfx: Handle<_> = asset_server.load("audio/sfx/".to_owned() + &emitter.sound);
 }

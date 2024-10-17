@@ -1,38 +1,35 @@
 use bevy::prelude::*;
-use bevy_kira_audio::AudioPlugin;
+// use bevy_kira_audio::AudioPlugin;
 
-#[cfg(feature = "debug")]
 use midi_keys::MidiKeysPlugin;
 
 use music::MusicPlugin;
-use sequencer::SequencerPlugin;
 use sfx::SfxPlugin;
 use soundfont::SoundFontPlugin;
+use synth::{resources::Vol, SynthPlugin};
 use systems::setup_cam_audio;
 
 pub struct LyrebirdPlugin;
 
 pub mod components;
-#[cfg(feature = "debug")]
 pub mod midi_keys;
 pub mod music;
 pub mod resources;
-pub mod sequencer;
 pub mod sfx;
 pub mod soundfont;
+pub mod synth;
 pub mod systems;
 
 impl Plugin for LyrebirdPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((
-            AudioPlugin,
-            #[cfg(feature = "debug")]
-            MidiKeysPlugin,
-            MusicPlugin,
-            SfxPlugin,
-            SoundFontPlugin,
-            SequencerPlugin,
-        ))
-        .observe(setup_cam_audio);
+        app.insert_resource(Vol(0.5))
+            .add_plugins((
+                MidiKeysPlugin,
+                MusicPlugin,
+                SfxPlugin,
+                SynthPlugin,
+                SoundFontPlugin,
+            ))
+            .observe(setup_cam_audio);
     }
 }

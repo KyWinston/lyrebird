@@ -1,5 +1,13 @@
 #[cfg(feature = "debug")]
+use bevy::log::{Level, LogPlugin};
+#[cfg(feature = "debug")]
+use bevy::prelude::*;
+#[cfg(feature = "debug")]
 use bevy_midi::{input::MidiInputSettings, output::MidiOutputSettings};
+#[cfg(feature = "debug")]
+use lyrebird::LyrebirdPlugin;
+#[cfg(feature = "debug")]
+use systems::setup;
 
 pub mod systems;
 
@@ -22,7 +30,7 @@ fn main() {
                     ..default()
                 })
                 .build(),
-            ParakeetPlugin,
+            LyrebirdPlugin,
         ))
         .add_systems(Startup, setup)
         .run();
