@@ -41,7 +41,7 @@ impl Default for MidiGraph {
                     + " 
                 ~evp: ~beat >> envperc 0.001 0.1 
                 ~dist: sin 500 >> mul 5.0
-                ~hi_hat: mix ~t.. >> hpf 7000 2.0 >> lpf 7000 0.01 >> mul ~dist >> mul ~evp
+                ~hi_hat: mix ~t.. >> hpf 7000 2.0 >> lpf 7000 0.01 >> mul ~dist >> mul ~evp >> hpf 7000 1.0
             ",
             }],
             mixer: "o: ~t1".to_string(),

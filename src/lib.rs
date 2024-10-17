@@ -1,11 +1,7 @@
 use bevy::prelude::*;
-// use bevy_kira_audio::AudioPlugin;
-
 use midi_keys::MidiKeysPlugin;
-
 use music::MusicPlugin;
 use sfx::SfxPlugin;
-use soundfont::SoundFontPlugin;
 use synth::{resources::Vol, SynthPlugin};
 use systems::setup_cam_audio;
 
@@ -16,7 +12,6 @@ pub mod midi_keys;
 pub mod music;
 pub mod resources;
 pub mod sfx;
-pub mod soundfont;
 pub mod synth;
 pub mod systems;
 
@@ -28,7 +23,6 @@ impl Plugin for LyrebirdPlugin {
                 MusicPlugin,
                 SfxPlugin,
                 SynthPlugin,
-                SoundFontPlugin,
             ))
             .observe(setup_cam_audio);
     }

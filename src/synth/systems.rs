@@ -1,10 +1,7 @@
 use bevy::prelude::*;
-use bevy_glicol::prelude::GlicolEngine;
 
 use super::{
-    components::InstrumentSource,
-    events::PlayTone,
-    resources::{InstrumentList, MidiGraph},
+    components::InstrumentSource, events::PlayTone, glicol_engine::GlicolEngine, resources::{InstrumentList, MidiGraph}
 };
 
 pub fn read_signal(
