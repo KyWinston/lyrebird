@@ -27,6 +27,7 @@ pub struct GlicolEngine {
     #[cfg(target_arch = "wasm32")]
     pub code: String,
 }
+
 #[allow(clippy::new_without_default)]
 impl GlicolEngine {
     #[cfg(not(target_arch = "wasm32"))]

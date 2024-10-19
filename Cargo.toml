@@ -65,3 +65,8 @@ name = "midi-debug"
 path = "examples/midi-debug/main.rs"
 features = ["debug"]
 doc-scrape-examples = true
+
+[[example]]
+name = "instrument-test"
+path = "examples/instrument-test/main.rs"
+doc-scrape-examples = true
