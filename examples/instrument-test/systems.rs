@@ -35,5 +35,7 @@ pub fn play_instrument(keys: Res<ButtonInput<KeyCode>>, mut tone: EventWriter<Pl
         tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(0)));
     } else if keys.just_pressed(KeyCode::Digit2) {
         tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(1)));
+    } else if keys.just_pressed(KeyCode::Digit3) {
+        tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(2)));
     }
 }

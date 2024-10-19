@@ -39,6 +39,17 @@ impl Plugin for SynthPlugin {
                             "~bass: saw ~bg_pitch >> lpf 700 0.5 >> mul ~bg_evp"
                         ),
                 },
+                Instrument {
+                    name: "bass_drum".to_string(),
+                    abbr: "bd".to_string(),
+                    assigned_code: 127,
+                    properties: vec![],
+                    sound_env: concat!(
+                            "~bd_env: ~bd_beat >> envperc 0.001 0.3\n",
+                            "~bd_envb: ~bd_beat >> envperc 0.001 0.3 >> mul 200.0",
+                            "~bass_drum: sin ~bd_envb >> mul ~bd_env >> mul 1.0"
+                        ).to_string()
+                }
             ]))
             .add_event::<PlayTone>()
             .add_systems(Startup, add_instruments)

@@ -38,6 +38,7 @@ impl MidiGraph {
             tracks: vec![
                 "~beat: speed 6.0 >> seq 1".to_string(),
                 "~bg_melody: speed 1.0 >> seq 60 _ 70 60 60_70 70_70".to_string(),
+                "~bd_beat: seq 60 _ 60 60 _ 60_60".to_string(),
             ],
             instruments,
             mixer: format!("o: mix {mix} >> mul 1.0").to_string(),
