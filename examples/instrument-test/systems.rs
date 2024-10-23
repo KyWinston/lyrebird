@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use lyrebird::synth::events::PlayTone;
+use lyrebird::synth::events::PlaySequence;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
@@ -22,20 +22,22 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     color: Color::BLACK,
                 }),
             ],
-            ..Default::default()
+            ..default()
         },
         ..default()
     },));
 }
 
-pub fn play_instrument(keys: Res<ButtonInput<KeyCode>>, mut tone: EventWriter<PlayTone>) {
+pub fn play_instrument(keys: Res<ButtonInput<KeyCode>>, mut tone: EventWriter<PlaySequence>) {
     if keys.just_pressed(KeyCode::Digit0) {
-        tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), None));
+        tone.send(PlaySequence(None));
     } else if keys.just_pressed(KeyCode::Digit1) {
-        tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(0)));
+        tone.send(PlaySequence(Some("hi_hat".to_string())));
     } else if keys.just_pressed(KeyCode::Digit2) {
-        tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(1)));
+        tone.send(PlaySequence(Some("bass".to_string())));
     } else if keys.just_pressed(KeyCode::Digit3) {
-        tone.send(PlayTone([145, 60, 127], "hi_hat".to_string(), Some(2)));
+        tone.send(PlaySequence(Some("bass_drum".to_string())));
+    } else if keys.just_pressed(KeyCode::Digit4) {
+        tone.send(PlaySequence(Some("snare_drum".to_string())));
     }
 }

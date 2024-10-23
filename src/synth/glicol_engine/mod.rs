@@ -62,6 +62,26 @@ impl GlicolEngine {
         engine.add_sample(name, sample, channels, sr);
     }
 
+    pub fn reset(&self) {
+        let mut engine = self.engine.lock();
+        engine.reset();
+    }
+
+    pub fn set_livecoding(&self, lc: bool) {
+        let mut engine = self.engine.lock();
+        engine.livecoding = lc;
+    }
+
+    pub fn set_sr(&self, sr: usize) {
+        let mut engine = self.engine.lock();
+        engine.set_sr(sr);
+    }
+
+    pub fn set_bpm(&self, bpm: f32) {
+        let mut engine = self.engine.lock();
+        engine.set_bpm(bpm);
+    }
+
     // for wasm
     #[cfg(target_arch = "wasm32")]
     pub fn new() -> Self {

@@ -1,4 +1,6 @@
-use bevy::prelude::Resource;
+use bevy::prelude::*;
+
+use super::glicol_engine::GlicolEngine;
 
 #[derive(Resource)]
 pub struct Vol(pub f32);
@@ -7,7 +9,6 @@ pub struct Vol(pub f32);
 pub struct MidiGraph {
     pub tracks: Vec<String>,
     pub instruments: Vec<Instrument>,
-    pub mixer: String,
 }
 
 #[derive(Resource, Clone)]
@@ -17,6 +18,18 @@ pub struct Instrument {
     pub assigned_code: u32,
     pub properties: Vec<String>,
     pub sound_env: String,
+}
+
+impl Instrument {
+    pub fn new(name: String, abbr: String, volume: f32, sound_env: String) -> Self {
+        Instrument {
+            name,
+            abbr,
+            assigned_code: 127,
+            properties: vec![],
+            sound_env: format!("{} >> mul {}", sound_env, volume),
+        }
+    }
 }
 
 #[derive(Resource, Clone)]
@@ -36,12 +49,22 @@ impl MidiGraph {
         }
         Self {
             tracks: vec![
-                "~beat: speed 6.0 >> seq 1".to_string(),
-                "~bg_melody: speed 1.0 >> seq 60 _ 70 60 60_70 70_70".to_string(),
-                "~bd_beat: seq 60 _ 60 60 _ 60_60".to_string(),
+                "~t1_hh_beat: speed 1.0 >> seq 60 60 60 60 60 60".to_string(),
+                "~t2_bg_melody: speed 1.0 >> seq 60 _ 70 60 60_70 70_70".to_string(),
+                "~t3_bd_beat: seq 60 _ 60 60 _ 60_60".to_string(),
+                "~t4_sd_beat: seq _ 60 _ 70 60 __70".to_string(),
             ],
             instruments,
-            mixer: format!("o: mix {mix} >> mul 1.0").to_string(),
         }
+    }
+    pub fn update_graph(&self, engine: Res<GlicolEngine>) {
+        let mut insts = vec![];
+        for i in self.instruments.iter() {
+            insts.push(i.sound_env.clone());
+        }
+        let output = &format!("{}\n{}", self.tracks.join("\n"), insts.join("\n"),).to_string();
+        #[cfg(feature = "debug")]
+        println!("{}", output);
+        engine.update_with_code(output);
     }
 }

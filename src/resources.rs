@@ -21,17 +21,3 @@ impl<T> Default for ChannelAudioState<T> {
         }
     }
 }
-
-//common generators
-// pub fn hh_808() -> An<Unit<U0,U1>> {
-//     unit::<U0, U1>(Box::new(
-//         square_hz(245.0)
-//             + square_hz(306.0)
-//             + square_hz(365.0)
-//             + square_hz(415.0)
-//             + square_hz(437.0)
-//             + square_hz(619.0),
-//     ))
-// }
-
-

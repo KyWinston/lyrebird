@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+#[cfg(feature = "midi")]
 use midi_keys::MidiKeysPlugin;
 use music::MusicPlugin;
 use sfx::SfxPlugin;
@@ -17,8 +18,9 @@ pub mod systems;
 
 impl Plugin for LyrebirdPlugin {
     fn build(&self, app: &mut App) {
-        app.insert_resource(Vol(0.5))
+        app.insert_resource(Vol(1.0))
             .add_plugins((
+                #[cfg(feature = "midi")]
                 MidiKeysPlugin,
                 MusicPlugin,
                 SfxPlugin,

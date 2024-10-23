@@ -6,21 +6,18 @@ use bevy::{
     prelude::*,
 };
 
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 use bevy_midi::input::{MidiData, MidiInput, MidiInputConnection};
-
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 use super::components::{Instructions, KEY_PORT_MAP};
-#[cfg(feature = "debug")]
-use crate::music::events::InstrumentPlayEvent;
 
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn refresh_ports(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     if keys.just_pressed(KeyCode::KeyR) {
         input.refresh_ports();
     }
 }
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn connect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     for (keycode, index) in &KEY_PORT_MAP {
         if keys.just_pressed(*keycode) {
@@ -30,13 +27,13 @@ pub fn connect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
         }
     }
 }
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn disconnect(keys: Res<ButtonInput<KeyCode>>, input: Res<MidiInput>) {
     if keys.just_pressed(KeyCode::Escape) {
         input.disconnect();
     }
 }
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn show_ports(input: Res<MidiInput>, mut instructions: Query<&mut Text, With<Instructions>>) {
     if input.is_changed() {
         let text_section = &mut instructions.single_mut().sections[1];
@@ -48,7 +45,7 @@ pub fn show_ports(input: Res<MidiInput>, mut instructions: Query<&mut Text, With
         }
     }
 }
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn show_connection(
     connection: Res<MidiInputConnection>,
     mut instructions: Query<&mut Text, With<Instructions>>,
@@ -65,7 +62,7 @@ pub fn show_connection(
         }
     }
 }
-#[cfg(feature = "debug")]
+#[cfg(feature = "midi")]
 pub fn show_last_message(
     mut midi_data: EventReader<MidiData>,
     mut instructions: Query<&mut Text, With<Instructions>>,
