@@ -26,6 +26,6 @@ impl Plugin for LyrebirdPlugin {
                 SfxPlugin,
                 SynthPlugin,
             ))
-            .observe(setup_cam_audio);
+            .add_observer(setup_cam_audio);
     }
 }

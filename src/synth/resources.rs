@@ -50,9 +50,10 @@ impl MidiGraph {
         Self {
             tracks: vec![
                 "~t1_hh_beat: speed 1.0 >> seq 60 60 60 60 60 60".to_string(),
-                "~t2_bg_melody: speed 1.0 >> seq 60 _ 70 60 60_70 70_70".to_string(),
-                "~t3_bd_beat: seq 60 _ 60 60 _ 60_60".to_string(),
-                "~t4_sd_beat: seq _ 60 _ 70 60 __70".to_string(),
+                "~t2_pp_melody: speed 1.0 >> seq 60 62 64 65 67 69 71 72".to_string(),
+                "~t3_bg_melody: speed 1.0 >> seq 60 _ 70 60 60_70 70_70".to_string(),
+                "~t4_bd_beat: seq 60 _ 60 60 _ 60_60".to_string(),
+                "~t5_sd_beat: seq _ 60 _ 70 60 __70".to_string(),
             ],
             instruments,
         }
