@@ -4,5 +4,5 @@ use bevy::prelude::*;
 pub struct SoundFont {
     pub name:String,
     pub target_chunk: [f64;2],
-    pub volume: f32,
+    pub volume: f64,
 }
