@@ -1,4 +1,4 @@
-use bevy::{color::palettes::css::RED, prelude::*};
+use bevy::prelude::*;
 use lyrebird::midi_keys::components::Instructions;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
