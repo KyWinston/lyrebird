@@ -1,17 +1,15 @@
-// use std::ops::Deref;
+use bevy::prelude::*;
+use bevy_kira_audio::{AudioChannel, AudioControl, AudioSource, MainTrack};
 
-// use bevy::prelude::*;
-// use bevy_glicol::prelude::GlicolEngine;
-
-// use super::components::SfxEmitter;
+use super::events::PlayTone;
 
 pub fn play_sfx(
-    // trigger: Trigger<OnAdd, SfxEmitter>,
-    // mut commands: Commands,
-    // engine: Res<GlicolEngine>,
-    // query: Query<(Entity, &SfxEmitter)>,
-    // asset_server: Res<AssetServer>,
+    mut tone: EventReader<PlayTone>,
+    asset_server: Res<AssetServer>,
+    audio: Res<AudioChannel<MainTrack>>,
 ) {
-    // engine.update_with_code(code);
-    // let mut sfx: Handle<_> = asset_server.load("audio/sfx/".to_owned() + &emitter.sound);
+    for tone in tone.read() {
+        let sfx: Handle<AudioSource> = asset_server.load(format!("audio/sfx/{}", &tone.0));
+        audio.play(sfx);
+    }
 }
