@@ -1,15 +1,48 @@
-use bevy::prelude::*;
-use bevy_kira_audio::{AudioChannel, AudioControl, AudioSource, MainTrack};
+use bevy::{ecs::component::HookContext, prelude::*};
+use bevy_kira_audio::{
+    AudioChannel, AudioControl, AudioInstance, AudioSource, AudioTween, MainTrack,
+};
 
-use super::events::PlayTone;
+use super::{
+    components::{ListeningCamera, SfxEmitter},
+    events::PlayTone,
+};
 
 pub fn play_sfx(
-    mut tone: EventReader<PlayTone>,
-    asset_server: Res<AssetServer>,
-    audio: Res<AudioChannel<MainTrack>>,
+    ctx: HookContext,
+    mut emitters: Query<&mut SfxEmitter>,
+    audio: ResMut<AudioChannel<MainTrack>>,
 ) {
-    for tone in tone.read() {
-        let sfx: Handle<AudioSource> = asset_server.load(format!("audio/sfx/{}", &tone.0));
-        audio.play(sfx);
+    if let Ok(mut sfx) = emitters.get_mut(ctx.entity) {
+        sfx.instance = audio
+            .play(sfx.sound)
+            .loop_from(sfx.get_duration().0)
+            .handle();
+    }
+}
+
+pub fn process_spatial_damping(
+    mut emitters: Query<(&Transform, &mut SfxEmitter)>,
+    mut audio: ResMut<Assets<AudioInstance>>,
+    listener: Query<(&GlobalTransform, &ListeningCamera)>,
+) {
+    if let Ok((l_transform, listener)) = listener.single() {
+        for (transform, sfx) in emitters.iter_mut() {
+            if let Some(sound) = audio.get_mut(sfx.instance.id()) {
+                let sfx_distance = l_transform.translation().distance(transform.translation);
+                sound.set_volume(
+                    EasingCurve::new(sfx.near, sfx.far, EaseFunction::CubicIn)
+                        .sample(sfx_distance)
+                        .unwrap_or_else(|| {
+                            if sfx_distance < sfx.near {
+                                1.0
+                            } else if sfx_distance > sfx.far {
+                                0.0
+                            }
+                        }),
+                    AudioTween::default(),
+                );
+            }
+        }
     }
 }

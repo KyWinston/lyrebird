@@ -1,11 +1,16 @@
 use bevy::prelude::*;
+use bevy_kira_audio::{AudioInstance, AudioSource};
 
 #[derive(Component, Reflect)]
 #[reflect(Component)]
+#[component(on_add = play_sfx)]
 pub struct SfxEmitter {
-    pub sound: String,
+    pub sound: Handle<AudioSource>,
+    pub instance: Handle<AudioInstance>,
     pub intensity: f64,
     pub looped: bool,
+    pub near: f32,
+    pub far: f32,
     start: f64,
     end: f64,
 }
@@ -14,8 +19,11 @@ impl SfxEmitter {
     pub fn new(sound: String, intensity: f64, looped: bool) -> Self {
         Self {
             sound,
+            instance: None,
             intensity,
             looped,
+            near: 0.0,
+            far: 100.0,
             start: 0.0,
             end: 1.0,
         }
