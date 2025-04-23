@@ -11,6 +11,6 @@ pub struct SfxPlugin;
 impl Plugin for SfxPlugin {
     fn build(&self, app: &mut App) {
         app.register_type::<SfxEmitter>()
-        .add_systems(Update, process_spatial_damping);
+            .add_systems(Update, (process_spatial_damping, process_spatial_damping));
     }
 }

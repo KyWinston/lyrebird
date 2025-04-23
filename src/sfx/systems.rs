@@ -21,6 +21,20 @@ pub fn play_sfx(
     }
 }
 
+pub fn process_sound_properties(
+    mut emitters: Query<(&Transform, &mut SfxEmitter)>,
+    mut audio: ResMut<Assets<AudioInstance>>,
+    listener: Query<(&GlobalTransform, &ListeningCamera)>,
+) {
+    if let Ok((l_transform, listener)) = listener.single() {
+        for (transform, sfx) in emitters.iter_mut() {
+            if let Some(sound) = audio.get_mut(sfx.instance.id()) {
+                sound.set_playback_rate(sfx.speed, AudioTween::default());
+            }
+        }
+    }
+}
+
 pub fn process_spatial_damping(
     mut emitters: Query<(&Transform, &mut SfxEmitter)>,
     mut audio: ResMut<Assets<AudioInstance>>,
