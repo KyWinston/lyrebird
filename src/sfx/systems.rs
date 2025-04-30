@@ -15,7 +15,7 @@ pub fn play_sfx(
 ) {
     if let Ok(mut sfx) = emitters.get_mut(ctx.entity) {
         sfx.instance = audio
-            .play(sfx.sound)
+            .play(sfx.sound.clone())
             .loop_from(sfx.get_duration().0)
             .handle();
     }
