@@ -1,12 +1,7 @@
 use bevy::{ecs::component::HookContext, prelude::*};
-use bevy_kira_audio::{
-    AudioChannel, AudioControl, AudioInstance, AudioSource, AudioTween, MainTrack,
-};
+use bevy_kira_audio::{prelude::Volume, AudioChannel, AudioControl, AudioInstance, AudioTween, MainTrack};
 
-use super::{
-    components::{ListeningCamera, SfxEmitter},
-    events::PlayTone,
-};
+use super::components::{ListeningCamera, SfxEmitter};
 
 pub fn play_sfx(
     ctx: HookContext,
@@ -29,7 +24,7 @@ pub fn process_sound_properties(
     if let Ok((l_transform, listener)) = listener.single() {
         for (transform, sfx) in emitters.iter_mut() {
             if let Some(sound) = audio.get_mut(sfx.instance.id()) {
-                sound.set_playback_rate(sfx.speed, AudioTween::default());
+                sound.set_playback_rate(sfx.speed.into(), AudioTween::default());
             }
         }
     }
@@ -45,15 +40,17 @@ pub fn process_spatial_damping(
             if let Some(sound) = audio.get_mut(sfx.instance.id()) {
                 let sfx_distance = l_transform.translation().distance(transform.translation);
                 sound.set_volume(
-                    EasingCurve::new(sfx.near, sfx.far, EaseFunction::CubicIn)
+                    Volume(EasingCurve::new(sfx.near, sfx.far, EaseFunction::CubicIn)
                         .sample(sfx_distance)
                         .unwrap_or_else(|| {
                             if sfx_distance < sfx.near {
                                 1.0
                             } else if sfx_distance > sfx.far {
                                 0.0
+                            }else{
+                                0.0
                             }
-                        }),
+                        })),
                     AudioTween::default(),
                 );
             }
