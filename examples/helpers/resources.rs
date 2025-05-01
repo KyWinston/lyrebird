@@ -31,7 +31,7 @@ impl Manifest for SoundfontManifest {
             .soundfonts
             .into_iter()
             .map(|raw_item| {
-                let handle = world.load_asset("soundfonts/".to_string() + &raw_item.path + ".wav");
+                let handle = world.load_asset("soundfonts/".to_string() + &raw_item.path + ".ogg");
 
                 let item = SoundFont {
                     name: raw_item.name.clone(),
